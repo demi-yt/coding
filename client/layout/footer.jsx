@@ -6,7 +6,7 @@ export default {
       author: 'Jokcy'
     }
   },
-  render () {
+  render (h) {
     return (
       <div id="footer">
         <span>Written by {this.author}</span>
