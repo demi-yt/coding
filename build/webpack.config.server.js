@@ -13,7 +13,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 const plugins = [
   // new MiniCssExtractPlugin({
-  //   filename:'styles.[contentHash:8].css'
+  //   filename: 'styles.[contentHash:8].css'
   // }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
@@ -27,6 +27,7 @@ if (isDev) {
 }
 
 config = merge(baseConfig, {
+  mode: 'production',
   target: 'node',
   entry: path.join(__dirname, '../client/server-entry.js'),
   devtool: 'source-map',
@@ -41,8 +42,9 @@ config = merge(baseConfig, {
       {
         test: /\.styl(us)?$/,
         use: [
-          // MiniCssExtractPlugin.loader,
+          // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/90
           'vue-style-loader',
+          // MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',

@@ -25,7 +25,7 @@ const defaultPluins = [
 ]
 
 const devServer = {
-  port: 8083,
+  port: 8000,
   host: '0.0.0.0',
   overlay: {
     errors: true
@@ -46,9 +46,6 @@ let config
 if (isDev) {
   config = merge(baseConfig, {
     mode: 'development',
-    output: {
-      publicPath: '/public/'
-    },
     devtool: '#cheap-module-eval-source-map',
     module: {
       rules: [
@@ -77,7 +74,7 @@ if (isDev) {
     },
     devServer,
     plugins: defaultPluins.concat([
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin()
       // new webpack.NoEmitOnErrorsPlugin()
     ])
   })
@@ -95,7 +92,7 @@ if (isDev) {
     module: {
       rules: [
         {
-          test:/\.styl(us)?$/,
+          test: /\.styl(us)?$/,
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
@@ -127,7 +124,7 @@ if (isDev) {
 
 config.resolve = {
   alias: {
-    'model': path.join(__dirname, '../client/model/client-model.js')
+    model: path.join(__dirname, '../client/model/client-model.js')
   }
 }
 
